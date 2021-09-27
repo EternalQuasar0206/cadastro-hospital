@@ -21,7 +21,7 @@ namespace cadastro_hospital.Models
         {
             if (!optionsBuilder.IsConfigured)
             {
-                optionsBuilder.UseSqlServer("Server=localhost;Database=master;Trusted_Connection=True;");
+                optionsBuilder.UseNpgsql("Server=localhost;Port=5432;Database=cadastro_hospital;User Id=postgres;Password=123;");
             }
         }
 
