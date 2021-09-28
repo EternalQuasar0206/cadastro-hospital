@@ -6,6 +6,7 @@ using System.Threading.Tasks;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Logging;
 using cadastro_hospital.Models;
+using cadastro_hospital.Data;
 
 namespace cadastro_hospital.Controllers
 {
@@ -18,9 +19,29 @@ namespace cadastro_hospital.Controllers
             _logger = logger;
         }
 
-        public IActionResult Index()
+        [HttpPost]
+        //Criar Paciente
+        public IActionResult Paciente([FromBody] Paciente paciente)
         {
-            return Content("");
+            return Content(GerenciarPacientes.Novo(paciente), "application/json");
         }
+
+        [HttpPatch]
+        //Alterar Paciente
+        public IActionResult Paciente([FromBody] AlterarPacienteRequest pacienteRequest)
+        {
+            var paciente = new Paciente() {
+                Nome = pacienteRequest.Nome,
+                Cpf = pacienteRequest.Cpf,
+                Nascimento = pacienteRequest.Nascimento,
+                Sexo = pacienteRequest.Sexo,
+                Telefone = pacienteRequest.Telefone,
+                Email = pacienteRequest.Email
+            };
+            return Content(GerenciarPacientes.Alterar(pacienteRequest.Id, paciente), "application/json");
+        }
+
+        [HttpDelete]
+        public IActionResult Paciente()
     }
 }
