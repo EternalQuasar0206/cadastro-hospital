@@ -19,6 +19,7 @@ namespace cadastro_hospital.Data {
                 //TODO: Adicionar validadores de informação
 
                 ctx.Pacientes.Add(paciente);
+                ctx.SaveChanges();
                 return JsonSerializer.Serialize(paciente);
             }
             catch(Exception e) {
@@ -28,8 +29,19 @@ namespace cadastro_hospital.Data {
             }
         }
 
-        public static string Alterar(Paciente paciente) {
+        public static string Alterar(int id, Paciente paciente) {
+            cadastro_hospitalContext ctx = new cadastro_hospitalContext();
+            Paciente entity = ctx.Pacientes.Where(x => x.Id == id).FirstOrDefault();
+            if (entity == null)
+            {
+                return JsonSerializer.Serialize(new Erro() {
+                    mensagem = "O id do paciente informado não existe"
+                });
+            }
 
+            ctx.Entry(entity).CurrentValues.SetValues(paciente);
+            ctx.SaveChanges();
+            return JsonSerializer.Serialize(entity);
         }
     }
 }
