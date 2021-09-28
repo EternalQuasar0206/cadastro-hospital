@@ -19,8 +19,10 @@ namespace cadastro_hospital.Controllers
             _logger = logger;
         }
 
+        //Gerenciamento de Paciente
+
         [HttpPost]
-        //Criar Paciente
+        //Criar paciente
         public IActionResult Paciente([FromBody] Paciente paciente)
         {
             return Content(GerenciarPacientes.Novo(paciente), "application/json");
@@ -44,6 +46,24 @@ namespace cadastro_hospital.Controllers
         [HttpDelete]
         public IActionResult Paciente([FromBody] ApagarPacienteRequest pacienteRequest) {
             return Content(GerenciarPacientes.Excluir(pacienteRequest.Id), "application/json");
+        }
+
+        //Gerenciamento de tipo de exame
+
+        [HttpPost]
+        //Criar tipo de exame
+        public IActionResult TipoExame([FromBody] TipoExame tipoExame) {
+            return Content(GerenciarTipoexames.Novo(tipoExame), "application/json");
+        }
+
+        [HttpPatch]
+        //Alterar tipo de exame
+        public IActionResult TipoExame([FromBody] AlterarExameRequest exameRequest) {
+            var tipo_exame = new TipoExame() {
+                Nome = exameRequest.Nome,
+                Descricao = exameRequest.Descricao
+            };
+            return Content(GerenciarTipoexames.Alterar(exameRequest.Id, tipo_exame));
         }
     }
 }
