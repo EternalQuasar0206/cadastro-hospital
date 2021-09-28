@@ -216,7 +216,7 @@ function CadastrarTipoExame() {
             alert(data.mensagem);
         }
         else {
-            alert("Tipo de exame criado com sucesso");
+            alert(JSON.stringify(data));
             location.reload(true);
         }
     })

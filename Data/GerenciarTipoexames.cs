@@ -11,6 +11,7 @@ namespace cadastro_hospital.Data {
 
             try {
                 ctx.TipoExames.Add(tipoexame);
+                ctx.SaveChanges();
                 return JsonSerializer.Serialize(tipoexame);
             }
             catch(Exception e) {
