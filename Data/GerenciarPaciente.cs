@@ -1,5 +1,6 @@
 using cadastro_hospital.Models;
 using System.Linq;
+using System.Text.Json;
 using System;
 
 namespace cadastro_hospital.Data {
@@ -15,19 +16,15 @@ namespace cadastro_hospital.Data {
                     throw new Exception("Já existe um CPF igual a esse cadastrado no sistema.");
                 }
 
-                ctx.Pacientes.Add(new Paciente() {
-                    Nome = paciente.Nome,
-                    Cpf = paciente.Cpf,
-                    Nascimento = paciente.Nascimento,
-                    Sexo = paciente.Sexo,
-                    Telefone = paciente.Telefone
+
+                ctx.Pacientes.Add(paciente);
+                return JsonSerializer.Serialize(paciente);
+            }
+            catch(Exception e) {
+                return JsonSerializer.Serialize(new Erro() {
+                    mensagem = "Ocorreu um erro ao realizar a ação: " + e
                 });
-                //TODO: Adicionar retorno de sucesso
             }
-            catch {
-                //TODO: Adicionar tratamento do erro
-            }
-            //TODO: Adicionar retorno padrão (falso)
         }
     }
 }
