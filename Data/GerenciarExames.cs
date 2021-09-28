@@ -57,7 +57,12 @@ namespace cadastro_hospital.Data {
                     mensagem = "Ocorreu um erro ao realizar a ação: " + e
                 });
             }
+        }
 
+        public static string Listar() {
+            cadastro_hospitalContext ctx = new cadastro_hospitalContext();
+            var exames = ctx.Exames.ToList();
+            return JsonSerializer.Serialize(exames);
         }
     }
 }

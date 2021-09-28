@@ -26,7 +26,8 @@ function CadastrarPaciente() {
             alert(data.mensagem);
         }
         else {
-            alert("Paciente criado com sucesso")
+            alert("Paciente criado com sucesso");
+            location.reload(true);
         }
     })
     .catch((error) => {
@@ -58,7 +59,8 @@ function EditarPaciente() {
             alert(data.mensagem);
         }
         else {
-            alert("Paciente editado com sucesso")
+            alert("Paciente editado com sucesso");
+            location.reload(true);
         }
     })
     .catch((error) => {
@@ -121,10 +123,44 @@ function CadastrarExame() {
             alert(data.mensagem);
         }
         else {
-            alert(JSON.stringify(data))
+            alert("Exame criado com sucesso");
+            location.reload(true);
         }
     })
     .catch((error) => {
         alert("Ocorreu um erro: " + error)
     })
 }
+
+function ApagarExame(id) {
+    fetch("../Api/Exame", {
+        method: "DELETE",
+        headers: {
+            "Content-Type": "application/json"
+        },
+        body: JSON.stringify({Id: id})
+    })
+    .then(response => response.json())
+    .then(data => {
+        if(data.mensagem) {
+            alert(data.mensagem);
+        }
+        else {
+            alert("Exame apagado com sucesso");
+            location.reload(true);
+        }
+    })
+    .catch((error) => {
+        alert("Ocorreu um erro: " + error)
+    })
+}
+
+fetch("../Api/Exame")
+.then(response => response.json())
+.then(data => {
+    data.forEach((x) => {
+        dq("#exames").innerHTML += 
+        "<b>" + x.Nome + "</b> | Tipo de exame:" + x.TipoexameId + " | Descrição: " 
+        + x.Descricao + " | <a href='#' onclick='ApagarExame(" + x.Id + ")'>[Apagar]</a>" + "<br>";
+    });
+});

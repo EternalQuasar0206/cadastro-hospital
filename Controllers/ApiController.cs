@@ -102,5 +102,11 @@ namespace cadastro_hospital.Controllers
         public IActionResult Exame([FromBody] ApagarTipoExameRequest exameRequest) {
             return Content(GerenciarExames.Excluir(exameRequest.Id), "application/json");
         }
+
+        [HttpGet]
+        //Listar exames
+        public IActionResult Exame() {
+            return Content(GerenciarExames.Listar(), "application/json");
+        }
     }
 }
