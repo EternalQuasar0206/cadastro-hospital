@@ -224,3 +224,13 @@ function CadastrarTipoExame() {
         alert("Ocorreu um erro: " + error)
     })
 }
+
+fetch("../Api/TipoExame")
+.then(response => response.json())
+.then(data => {
+    data.forEach((x) => {
+        dq("#tipo-exames").innerHTML += 
+        "<b>" + x.Nome + "</b> | Descrição: " 
+        + x.Descricao + " | <a href='#' onclick='ApagarTipoExame(" + x.Id + ")'>[Apagar]</a>" + "<br>";
+    });
+});
