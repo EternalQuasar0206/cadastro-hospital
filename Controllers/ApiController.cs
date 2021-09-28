@@ -79,6 +79,12 @@ namespace cadastro_hospital.Controllers
             return Content(GerenciarTipoexames.Excluir(exameRequest.Id), "application/json");
         }
 
+        [HttpGet]
+        //Listar tipos de exame
+        public IActionResult TipoExame() {
+            return Content(GerenciarTipoexames.Listar(), "application/json");
+        }
+
         //====================Gerenciamento de exame====================
         [HttpPost]
         //Criar exame
