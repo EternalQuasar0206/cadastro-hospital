@@ -194,3 +194,33 @@ fetch("../Api/Exame")
         + x.Descricao + " | <a href='#' onclick='ApagarExame(" + x.Id + ")'>[Apagar]</a>" + "<br>";
     });
 });
+
+//====================Tipos de exame====================
+
+function CadastrarTipoExame() {
+    let data = {
+        Nome: dq("#nome-tipo-exame").value,
+        Descricao: dq("#descricao-tipo-exame").value
+    }
+
+    fetch("../Api/TipoExame", {
+        method: "POST",
+        headers: {
+            "Content-Type": "application/json"
+        },
+        body: JSON.stringify(data)
+    })
+    .then(response => response.json())
+    .then(data => {
+        if(data.mensagem) {
+            alert(data.mensagem);
+        }
+        else {
+            alert("Tipo de exame criado com sucesso");
+            location.reload(true);
+        }
+    })
+    .catch((error) => {
+        alert("Ocorreu um erro: " + error)
+    })
+}
