@@ -1,4 +1,5 @@
 using System;
+using System.Text.RegularExpressions;
 
 namespace cadastro_hospital {
     public static class Validadores {
@@ -47,6 +48,22 @@ namespace cadastro_hospital {
             else { 
                 return false;
             }
+        }
+
+        public static bool IsEmail(string email)
+        {
+            try {
+                var addr = new System.Net.Mail.MailAddress(email);
+                return addr.Address == email;
+            }
+            catch {
+                return false;
+            }
+        }
+
+        public static bool IsPhone(string number)
+        {
+            return Regex.Match(number, @"^(\+[0-9]{9})$").Success;
         }
     }
 }
