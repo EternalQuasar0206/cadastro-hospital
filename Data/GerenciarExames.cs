@@ -30,17 +30,17 @@ namespace cadastro_hospital.Data {
 
         public static string Alterar(int id, Exame exame) {
             cadastro_hospitalContext ctx = new cadastro_hospitalContext();
-            Exame entity = ctx.Exames.Where(x => x.Id == id).FirstOrDefault();
-            if (entity == null)
+
+            var result = ctx.Exames.SingleOrDefault(x => x.Id == id);
+            if (result != null)
             {
-                return JsonSerializer.Serialize(new Erro() {
-                    mensagem = "O id do exame informado não existe"
-                });
+                if(exame.Nome != null && exame.Nome != "") result.Nome = exame.Nome;
+                if(exame.TipoexameId != 0) result.TipoexameId = exame.TipoexameId;
+                if(exame.Descricao != null && exame.Descricao != "") result.Descricao = exame.Descricao;
+                ctx.SaveChanges();
             }
 
-            ctx.Entry(entity).CurrentValues.SetValues(exame);
-            ctx.SaveChanges();
-            return JsonSerializer.Serialize(entity);
+            return JsonSerializer.Serialize(result);
         }
 
         public static string Excluir(int id) {

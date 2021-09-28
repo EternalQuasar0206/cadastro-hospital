@@ -132,6 +132,36 @@ function CadastrarExame() {
     })
 }
 
+function EditarExame() {
+    let data = {
+        Id: dq("#id-exame").value,
+        Nome: dq("#enome-exame").value,
+        TipoexameId: dq("#etipo-exame-id").value,
+        Descricao: dq("#edescricao-exame").value
+    }
+
+    fetch("../Api/Exame", {
+        method: "PATCH",
+        headers: {
+            "Content-Type": "application/json"
+        },
+        body: JSON.stringify(data)
+    })
+    .then(response => response.json())
+    .then(data => {
+        if(data.mensagem) {
+            alert(data.mensagem);
+        }
+        else {
+            alert("Exame editado com sucesso");
+            location.reload(true);
+        }
+    })
+    .catch((error) => {
+        alert("Ocorreu um erro: " + error)
+    })
+}
+
 function ApagarExame(id) {
     fetch("../Api/Exame", {
         method: "DELETE",
