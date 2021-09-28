@@ -35,8 +35,6 @@ namespace cadastro_hospital.Models
 
             modelBuilder.Entity<Exame>(entity =>
             {
-                entity.HasNoKey();
-
                 entity.ToTable("exames");
 
                 entity.Property(e => e.Descricao)
@@ -58,8 +56,6 @@ namespace cadastro_hospital.Models
 
             modelBuilder.Entity<Paciente>(entity =>
             {
-                entity.HasNoKey();
-
                 entity.ToTable("pacientes");
 
                 entity.Property(e => e.Cpf)
@@ -98,8 +94,6 @@ namespace cadastro_hospital.Models
 
             modelBuilder.Entity<TipoExame>(entity =>
             {
-                entity.HasNoKey();
-
                 entity.ToTable("tipo_exame");
 
                 entity.Property(e => e.Descricao)
