@@ -42,6 +42,8 @@ namespace cadastro_hospital.Controllers
         }
 
         [HttpDelete]
-        public IActionResult Paciente()
+        public IActionResult Paciente([FromBody] ApagarPacienteRequest pacienteRequest) {
+            return Content(GerenciarPacientes.Excluir(pacienteRequest.Id), "application/json");
+        }
     }
 }
