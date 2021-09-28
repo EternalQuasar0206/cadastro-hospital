@@ -19,7 +19,7 @@ namespace cadastro_hospital.Controllers
             _logger = logger;
         }
 
-        //Gerenciamento de Paciente
+        //====================Gerenciamento de Paciente====================
 
         [HttpPost]
         //Criar paciente
@@ -49,7 +49,7 @@ namespace cadastro_hospital.Controllers
             return Content(GerenciarPacientes.Excluir(pacienteRequest.Id), "application/json");
         }
 
-        //Gerenciamento de tipo de exame
+        //====================Gerenciamento de tipo de exame====================
 
         [HttpPost]
         //Criar tipo de exame
@@ -59,7 +59,30 @@ namespace cadastro_hospital.Controllers
 
         [HttpPatch]
         //Alterar tipo de exame
-        public IActionResult TipoExame([FromBody] AlterarExameRequest exameRequest) {
+        public IActionResult TipoExame([FromBody] AlterarTipoExameRequest exameRequest) {
+            var tipo_exame = new TipoExame() {
+                Nome = exameRequest.Nome,
+                Descricao = exameRequest.Descricao
+            };
+            return Content(GerenciarTipoexames.Alterar(exameRequest.Id, tipo_exame));
+        }
+
+        [HttpDelete]
+        //Apagar tipo de exame
+        public IActionResult TipoExame([FromBody] ApagarTipoExameRequest exameRequest) {
+            return Content(GerenciarTipoexames.Excluir(exameRequest.Id),"application/json");
+        }
+
+        //====================Gerenciamento de exame====================
+        [HttpPost]
+        //Criar exame
+        public IActionResult Exame([FromBody] Exame exame) {
+            return Content(GerenciarExames.Novo(exame), "application/json");
+        }
+
+        [HttpPatch]
+        //Alterar tipo de exame
+        public IActionResult Exame([FromBody] AlterarExameRequest exameRequest) {
             var tipo_exame = new TipoExame() {
                 Nome = exameRequest.Nome,
                 Descricao = exameRequest.Descricao
