@@ -286,3 +286,34 @@ fetch("../Api/TipoExame")
         + x.Descricao + " | <a href='#' onclick='ApagarTipoExame(" + x.Id + ")'>[Apagar]</a>" + "<br>";
     });
 });
+
+//====================Consultas====================
+
+function MarcarConsulta() {
+    let data = {
+        Paciente: dq("#id_paciente").value,
+        Exame: dq("#id_exame").value,
+        Data: dq("#data_consulta").value
+    }
+
+    fetch("../Api/Consulta", {
+        method: "POST",
+        headers: {
+            "Content-Type": "application/json"
+        },
+        body: JSON.stringify(data)
+    })
+    .then(response => response.json())
+    .then(data => {
+        if(data.mensagem) {
+            alert(data.mensagem);
+        }
+        else {
+            alert("Consulta marcada com sucesso");
+            location.reload(true);
+        }
+    })
+    .catch((error) => {
+        alert("Ocorreu um erro: " + error)
+    })
+}
