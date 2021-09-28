@@ -23,17 +23,16 @@ namespace cadastro_hospital.Data {
 
         public static string Alterar(int id, TipoExame tipoexame) {
             cadastro_hospitalContext ctx = new cadastro_hospitalContext();
-            TipoExame entity = ctx.TipoExames.Where(x => x.Id == id).FirstOrDefault();
-            if (entity == null)
+
+            var result = ctx.TipoExames.SingleOrDefault(x => x.Id == id);
+            if (result != null)
             {
-                return JsonSerializer.Serialize(new Erro() {
-                    mensagem = "O id do tipo de exame informado não existe"
-                });
+                if(tipoexame.Nome != null && tipoexame.Nome != "") result.Nome = tipoexame.Nome;
+                if(tipoexame.Descricao != null && tipoexame.Descricao != "") result.Descricao = tipoexame.Descricao;
+                ctx.SaveChanges();
             }
 
-            ctx.Entry(entity).CurrentValues.SetValues(tipoexame);
-            ctx.SaveChanges();
-            return JsonSerializer.Serialize(entity);
+            return JsonSerializer.Serialize(result);
         }
 
         public static string Excluir(int id) {
