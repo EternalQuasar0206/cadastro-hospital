@@ -15,5 +15,9 @@ namespace cadastro_hospital.Controllers
         public IActionResult Home() {
             return View();
         }
+
+        public IActionResult Consultas() {
+            return View();
+        }
     }
 }
