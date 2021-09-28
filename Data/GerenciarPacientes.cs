@@ -2,8 +2,8 @@ using cadastro_hospital.Models;
 using System.Linq;
 using System.Text.Json;
 using System;
+using cadastro_hospital;
 
-//TODO: Adicionar validadores de informação
 namespace cadastro_hospital.Data {
     public static class GerenciarPacientes {
         public static string Novo(Paciente paciente) {
@@ -11,6 +11,10 @@ namespace cadastro_hospital.Data {
 
             try {
                 var cpf_equals_list = ctx.Pacientes.Where(x => x.Cpf == paciente.Cpf).ToList();
+
+                if(!(Validadores.IsCpf(paciente.Cpf) && Validadores.IsPhone(paciente.Telefone) && Validadores.IsEmail(paciente.Email))) {
+                    throw new Exception("Dados inválidos, verifique os dados inseridos.");
+                }
 
                 if(cpf_equals_list.Count > 0) {
                     throw new Exception("Já existe um CPF igual a esse cadastrado no sistema.");
