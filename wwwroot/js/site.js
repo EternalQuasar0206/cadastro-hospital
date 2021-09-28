@@ -2,6 +2,7 @@
     return document.querySelector(x);
 }
 
+//====================Pacientes====================
 function CadastrarPaciente() {
     let data = {
         Nome: dq("#nome_paciente").value,
@@ -97,3 +98,33 @@ fetch("../Api/Paciente")
         + x.Telefone + " | <a href='#' onclick='ApagarPaciente(" + x.Id + ")'>[Apagar]</a>" + "<br>";
     });
 });
+
+//====================Exames====================
+
+function CadastrarExame() {
+    let data = {
+        Nome: dq("#nome-exame").value,
+        TipoexameId: dq("#tipo-exame-id").value,
+        Descricao: dq("#descricao-exame").value
+    }
+
+    fetch("../Api/Exame", {
+        method: "POST",
+        headers: {
+            "Content-Type": "application/json"
+        },
+        body: JSON.stringify(data)
+    })
+    .then(response => response.json())
+    .then(data => {
+        if(data.mensagem) {
+            alert(data.mensagem);
+        }
+        else {
+            alert(JSON.stringify(data))
+        }
+    })
+    .catch((error) => {
+        alert("Ocorreu um erro: " + error)
+    })
+}
