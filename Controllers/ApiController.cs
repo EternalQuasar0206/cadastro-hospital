@@ -10,11 +10,11 @@ using cadastro_hospital.Data;
 
 namespace cadastro_hospital.Controllers
 {
-    public class HomeController : Controller
+    public class ApiController : Controller
     {
-        private readonly ILogger<HomeController> _logger;
+        private readonly ILogger<ApiController> _logger;
 
-        public HomeController(ILogger<HomeController> logger)
+        public ApiController(ILogger<ApiController> logger)
         {
             _logger = logger;
         }
@@ -70,7 +70,7 @@ namespace cadastro_hospital.Controllers
         [HttpDelete]
         //Apagar tipo de exame
         public IActionResult TipoExame([FromBody] ApagarTipoExameRequest exameRequest) {
-            return Content(GerenciarTipoexames.Excluir(exameRequest.Id),"application/json");
+            return Content(GerenciarTipoexames.Excluir(exameRequest.Id), "application/json");
         }
 
         //====================Gerenciamento de exame====================
@@ -81,19 +81,20 @@ namespace cadastro_hospital.Controllers
         }
 
         [HttpPatch]
-        //Alterar tipo de exame
+        //Alterar exame
         public IActionResult Exame([FromBody] AlterarExameRequest exameRequest) {
-            var tipo_exame = new TipoExame() {
+            var exame = new Exame() {
                 Nome = exameRequest.Nome,
-                Descricao = exameRequest.Descricao
+                Descricao = exameRequest.Descricao,
+                TipoexameId = exameRequest.TipoexameId
             };
-            return Content(GerenciarTipoexames.Alterar(exameRequest.Id, tipo_exame));
+            return Content(GerenciarExames.Alterar(exameRequest.Id, exame), "application/json");
         }
 
         [HttpDelete]
-        //Apagar tipo de exame
-        public IActionResult TipoExame([FromBody] ApagarTipoExameRequest exameRequest) {
-            return Content(GerenciarTipoexames.Excluir(exameRequest.Id),"application/json");
+        //Apagar exame
+        public IActionResult Exame([FromBody] ApagarTipoExameRequest exameRequest) {
+            return Content(GerenciarExames.Excluir(exameRequest.Id), "application/json");
         }
     }
 }
