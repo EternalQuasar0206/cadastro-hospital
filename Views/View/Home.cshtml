@@ -32,6 +32,7 @@
     </header>
     <div class="container">
         <main role="main" class="pb-3">
+            <!--Cadastro do Paciente-->
             <div id="cadastro-paciente">
                 <h1>Cadastro do Paciente</h1>
                 <input type="text" id="nome_paciente" placeholder="Nome">
@@ -48,6 +49,26 @@
                 <input type="text" id="telefone_paciente" placeholder="Telefone">
                 <br>
                 <input type="submit" value="Cadastrar" onclick="CadastrarPaciente()">
+            </div>
+            <br>
+            <!--Edição do do Paciente-->
+            <div id="edicao-paciente">
+                <h1>Editar da Paciente</h1>
+                <input type="text" size="3" id="id_paciente" placeholder="Id">
+                <input type="text" id="nome_paciente" placeholder="Nome">
+                <input type="text" id="cpf_paciente" placeholder="Cpf">
+                <input type="text" id="nascimento_paciente" placeholder="Nascimento">
+                <select id="sexo_paciente">
+                    <option value="" disabled selected>Sexo</option>
+                    <option value="M">Masculino</option>
+                    <option value="F">Feminino</option>
+                    <option value="O">Outro</option>
+                </select>
+                <br>
+                <input type="text" id="email_paciente" placeholder="Email">
+                <input type="text" id="telefone_paciente" placeholder="Telefone">
+                <br>
+                <input type="submit" value="Editar" onclick="EditarPaciente()">
             </div>
         </main>
     </div>
