@@ -64,3 +64,7 @@ function EditarPaciente() {
         alert("Ocorreu um erro: " + error)
     })
 }
+
+fetch("../Api/Paciente")
+    .then(response => response.json())
+    .then(data => dq("#pacientes").innerText = JSON.stringify(data));
