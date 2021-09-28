@@ -66,5 +66,11 @@ function EditarPaciente() {
 }
 
 fetch("../Api/Paciente")
-    .then(response => response.json())
-    .then(data => dq("#pacientes").innerText = JSON.stringify(data));
+.then(response => response.json())
+.then(data => {
+    data.forEach((x) => {
+        dq("#pacientes").innerHTML += 
+        "<b>" + x.Nome + "</b> | " + x.Cpf + " | " + x.Nascimento + " | " + x.Email + " | Sexo: " + x.Sexo + " | "
+        + x.Telefone + "<br>";
+    });
+});
