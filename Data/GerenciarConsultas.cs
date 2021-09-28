@@ -50,5 +50,11 @@ namespace cadastro_hospital.Data {
                 });
             }
         }
+        
+        public static string Listar() {
+            cadastro_hospitalContext ctx = new cadastro_hospitalContext();
+            var consultas = ctx.Consultas.ToList();
+            return JsonSerializer.Serialize(consultas);
+        }
     }
 }
