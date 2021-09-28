@@ -3,6 +3,7 @@ using System.Linq;
 using System.Text.Json;
 using System;
 
+//TODO: Adicionar validadores de informação
 namespace cadastro_hospital.Data {
     public static class GerenciarPacientes {
         public static string Novo(Paciente paciente) {
@@ -14,8 +15,6 @@ namespace cadastro_hospital.Data {
                 if(cpf_equals_list.Count > 0) {
                     throw new Exception("Já existe um CPF igual a esse cadastrado no sistema.");
                 }
-
-                //TODO: Adicionar validadores de informação
 
                 ctx.Pacientes.Add(paciente);
                 ctx.SaveChanges();
