@@ -65,12 +65,35 @@ function EditarPaciente() {
     })
 }
 
+function ApagarPaciente(id) {
+    fetch("../Api/Paciente", {
+        method: "DELETE",
+        headers: {
+            "Content-Type": "application/json"
+        },
+        body: JSON.stringify({Id: id})
+    })
+    .then(response => response.json())
+    .then(data => {
+        if(data.mensagem) {
+            alert(data.mensagem);
+        }
+        else {
+            alert("Paciente apagado com sucesso");
+            location.reload(true);
+        }
+    })
+    .catch((error) => {
+        alert("Ocorreu um erro: " + error)
+    })
+}
+
 fetch("../Api/Paciente")
 .then(response => response.json())
 .then(data => {
     data.forEach((x) => {
         dq("#pacientes").innerHTML += 
         "<b>" + x.Nome + "</b> | " + x.Cpf + " | " + x.Nascimento + " | " + x.Email + " | Sexo: " + x.Sexo + " | "
-        + x.Telefone + "<br>";
+        + x.Telefone + " | <a href='#' onclick='ApagarPaciente(" + x.Id + ")'>[Apagar]</a>" + "<br>";
     });
 });
