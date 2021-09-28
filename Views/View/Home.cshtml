@@ -47,11 +47,12 @@
                 <input type="text" id="email_paciente" placeholder="Email">
                 <input type="text" id="telefone_paciente" placeholder="Telefone">
                 <br>
-                <input type="submit">
+                <input type="submit" value="Cadastrar" onclick="CadastrarPaciente()">
             </div>
         </main>
     </div>
 
+    <script src="~/js/site.js"></script>
     <footer class="border-top footer text-muted">
         <div class="container">
             &copy; 2021 - Kayky Vitor Cruz - <a asp-area="" asp-controller="Home" asp-action="Privacy">Privacy</a>
@@ -59,6 +60,5 @@
     </footer>
     <script src="~/lib/jquery/dist/jquery.min.js"></script>
     <script src="~/lib/bootstrap/dist/js/bootstrap.bundle.min.js"></script>
-    <script src="~/js/site.js" asp-append-version="true"></script>
 </body>
 </html>
