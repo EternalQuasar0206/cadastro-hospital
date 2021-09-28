@@ -16,6 +16,7 @@ namespace cadastro_hospital.Data {
                 if(!IsDate(consultaRequest.data)) {
                     throw new Exception("Data inválida");
                 }
+                
                 var consulta = new Consulta() {
                     Paciente = paciente.Id,
                     Exame = exame.Id,

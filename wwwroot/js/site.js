@@ -317,3 +317,37 @@ function MarcarConsulta() {
         alert("Ocorreu um erro: " + error)
     })
 }
+
+function DesmarcarConsulta(id) {
+    fetch("../Api/Consulta", {
+        method: "DELETE",
+        headers: {
+            "Content-Type": "application/json"
+        },
+        body: JSON.stringify({Id: id})
+    })
+    .then(response => response.json())
+    .then(data => {
+        if(data.mensagem) {
+            alert(data.mensagem);
+        }
+        else {
+            alert("Consulta desmarcada com sucesso");
+            location.reload(true);
+        }
+    })
+    .catch((error) => {
+        alert("Ocorreu um erro: " + error)
+    })
+}
+
+fetch("../Api/Consulta")
+.then(response => response.json())
+.then(data => {
+    data.forEach((x) => {
+        dq("#consultas").innerHTML += 
+        x.Id + " | " + "Id Paciente: <b>" + x.Paciente + "</b> | Exame: " 
+        + x.Exame + " | Protocolo: " + x.Protocolo + " | Data: " + x.Data + 
+        " | <a href='#' onclick='DesmarcarConsulta(" + x.Id + ")'>[Desmarcar]</a>" + "<br>";
+    });
+});

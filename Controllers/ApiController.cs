@@ -117,19 +117,19 @@ namespace cadastro_hospital.Controllers
 
         //====================Consultas====================
         [HttpPost]
-        //Criar exame
+        //Marcar consulta
         public IActionResult Consulta([FromBody] MarcarConsultaRequest consultaRequest) {
             return Content(GerenciarConsultas.Marcar(consultaRequest), "application/json");
         }
 
         [HttpDelete]
-        //Apagar exame
+        //Desmarcar consulta
         public IActionResult Consulta([FromBody] DesmarcarConsultaRequest consultaRequest) {
             return Content(GerenciarConsultas.Desmarcar(consultaRequest), "application/json");
         }
 
         [HttpGet]
-        //Listar exames
+        //Listar consulta
         public IActionResult Consulta() {
             return Content(GerenciarConsultas.Listar(), "application/json");
         }
