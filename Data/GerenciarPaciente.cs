@@ -16,6 +16,7 @@ namespace cadastro_hospital.Data {
                     throw new Exception("Já existe um CPF igual a esse cadastrado no sistema.");
                 }
 
+                //TODO: Adicionar validadores de informação
 
                 ctx.Pacientes.Add(paciente);
                 return JsonSerializer.Serialize(paciente);
@@ -25,6 +26,10 @@ namespace cadastro_hospital.Data {
                     mensagem = "Ocorreu um erro ao realizar a ação: " + e
                 });
             }
+        }
+
+        public static string Alterar(Paciente paciente) {
+
         }
     }
 }

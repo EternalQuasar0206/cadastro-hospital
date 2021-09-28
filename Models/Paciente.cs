@@ -10,9 +10,7 @@ namespace cadastro_hospital.Models
     {
         [Key]
         public int Id { get; set; }
-        [MaxLength(100)]
         public string Nome { get; set; }
-        [MaxLength(11)]
         public string Cpf { get; set; }
         public string Nascimento { get; set; }
         public char Sexo { get; set; }
