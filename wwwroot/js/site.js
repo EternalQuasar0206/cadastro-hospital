@@ -96,7 +96,7 @@ fetch("../Api/Paciente")
 .then(data => {
     data.forEach((x) => {
         dq("#pacientes").innerHTML += 
-        "<b>" + x.Nome + "</b> | " + x.Cpf + " | " + x.Nascimento + " | " + x.Email + " | Sexo: " + x.Sexo + " | "
+        x.Id + " | " + "<b>" + x.Nome + "</b> | " + x.Cpf + " | " + x.Nascimento + " | " + x.Email + " | Sexo: " + x.Sexo + " | "
         + x.Telefone + " | <a href='#' onclick='ApagarPaciente(" + x.Id + ")'>[Apagar]</a>" + "<br>";
     });
 });
@@ -190,7 +190,7 @@ fetch("../Api/Exame")
 .then(data => {
     data.forEach((x) => {
         dq("#exames").innerHTML += 
-        "<b>" + x.Nome + "</b> | Tipo de exame:" + x.TipoexameId + " | Descrição: " 
+        x.Id + " | " + "<b>" + x.Nome + "</b> | Tipo de exame:" + x.TipoexameId + " | Descrição: " 
         + x.Descricao + " | <a href='#' onclick='ApagarExame(" + x.Id + ")'>[Apagar]</a>" + "<br>";
     });
 });
@@ -282,7 +282,7 @@ fetch("../Api/TipoExame")
 .then(data => {
     data.forEach((x) => {
         dq("#tipo-exames").innerHTML += 
-        "<b>" + x.Nome + "</b> | Descrição: " 
+        x.Id + " | " + "<b>" + x.Nome + "</b> | Descrição: " 
         + x.Descricao + " | <a href='#' onclick='ApagarTipoExame(" + x.Id + ")'>[Apagar]</a>" + "<br>";
     });
 });
