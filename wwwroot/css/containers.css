@@ -1,3 +1,7 @@
+input {
+    margin-top: 1%;
+}
+
 #cadastro-paciente h1 {
     font-size: 2em;
 }
