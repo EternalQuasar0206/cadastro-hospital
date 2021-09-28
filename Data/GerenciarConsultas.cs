@@ -35,8 +35,20 @@ namespace cadastro_hospital.Data {
             }
         }
 
-        public static string Desmarcar() {
-            return "";
+        public static string Desmarcar(DesmarcarConsultaRequest consultaRequest) {
+            cadastro_hospitalContext ctx = new cadastro_hospitalContext();
+
+            try {
+                Consulta entity = ctx.Consultas.Where(x => x.Id == consultaRequest.id).FirstOrDefault();
+                ctx.Consultas.Remove(entity);
+                ctx.SaveChanges();
+                return JsonSerializer.Serialize(entity);
+            }
+            catch(Exception e) {
+                return JsonSerializer.Serialize(new Erro() {
+                    mensagem = "Ocorreu um erro ao realizar a ação: " + e
+                });
+            }
         }
     }
 }
