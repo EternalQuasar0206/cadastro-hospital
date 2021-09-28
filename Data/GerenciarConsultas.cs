@@ -13,7 +13,7 @@ namespace cadastro_hospital.Data {
                 var exame = ctx.Exames.Where(x => x.Id == consultaRequest.exame).FirstOrDefault();
                 var concorrente_data = ctx.Consultas.Where(x => x.Data == consultaRequest.data).FirstOrDefault();
 
-                if(concorrente_data.Paciente != null) {
+                if(concorrente_data.Data != null) {
                     var consulta = new Consulta() {
                         Paciente = consultaRequest.paciente,
                         Exame = consultaRequest.exame,
