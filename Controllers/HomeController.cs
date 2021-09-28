@@ -44,6 +44,7 @@ namespace cadastro_hospital.Controllers
         }
 
         [HttpDelete]
+        //Apagar paciente
         public IActionResult Paciente([FromBody] ApagarPacienteRequest pacienteRequest) {
             return Content(GerenciarPacientes.Excluir(pacienteRequest.Id), "application/json");
         }
@@ -64,6 +65,12 @@ namespace cadastro_hospital.Controllers
                 Descricao = exameRequest.Descricao
             };
             return Content(GerenciarTipoexames.Alterar(exameRequest.Id, tipo_exame));
+        }
+
+        [HttpDelete]
+        //Apagar tipo de exame
+        public IActionResult TipoExame([FromBody] ApagarTipoExameRequest exameRequest) {
+            return Content(GerenciarTipoexames.Excluir(exameRequest.Id),"application/json");
         }
     }
 }
