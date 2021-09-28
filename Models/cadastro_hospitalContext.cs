@@ -111,6 +111,31 @@ namespace cadastro_hospital.Models
                     .HasColumnName("nome");
             });
 
+            modelBuilder.Entity<Consulta>(entity =>
+            {
+                entity.ToTable("consultar");
+
+                entity.Property(e => e.Paciente)
+                    .IsRequired()
+                    .HasColumnName("paciente");
+
+                entity.Property(e => e.Id)
+                    .ValueGeneratedOnAdd()
+                    .HasColumnName("id");
+
+                entity.Property(e => e.Exame)
+                    .IsRequired()
+                    .HasColumnName("exame");
+
+                entity.Property(e => e.Data)
+                    .IsRequired()
+                    .HasColumnName("data");
+
+                entity.Property(e => e.Protocolo)
+                    .IsRequired()
+                    .HasColumnName("protocolo"); 
+            });
+
             OnModelCreatingPartial(modelBuilder);
         }
 
