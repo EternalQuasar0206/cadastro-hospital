@@ -114,7 +114,7 @@ namespace cadastro_hospital.Models
 
             modelBuilder.Entity<Consulta>(entity =>
             {
-                entity.ToTable("consultar");
+                entity.ToTable("consultas");
 
                 entity.Property(e => e.Paciente)
                     .IsRequired()
