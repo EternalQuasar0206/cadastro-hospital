@@ -49,6 +49,12 @@ namespace cadastro_hospital.Controllers
             return Content(GerenciarPacientes.Excluir(pacienteRequest.Id), "application/json");
         }
 
+        [HttpGet]
+        //Listar pacientes
+        public IActionResult Paciente() {
+            return Content(GerenciarPacientes.Listar(), "application/json");
+        }
+
         //====================Gerenciamento de tipo de exame====================
 
         [HttpPost]
