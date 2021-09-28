@@ -20,6 +20,7 @@ namespace cadastro_hospital.Models
         public virtual DbSet<Exame> Exames { get; set; }
         public virtual DbSet<Paciente> Pacientes { get; set; }
         public virtual DbSet<TipoExame> TipoExames { get; set; }
+        public virtual DbSet<Consulta> Consultas { get; set; }
 
         protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
         {
