@@ -216,7 +216,7 @@ function CadastrarTipoExame() {
             alert(data.mensagem);
         }
         else {
-            alert(JSON.stringify(data));
+            alert("Tipo de exame criado com sucesso");
             location.reload(true);
         }
     })
@@ -240,6 +240,35 @@ function ApagarTipoExame(id) {
         }
         else {
             alert("Tipo de exame apagado com sucesso");
+            location.reload(true);
+        }
+    })
+    .catch((error) => {
+        alert("Ocorreu um erro: " + error)
+    })
+}
+
+function EditarTipoExame() {
+    let data = {
+        Id: dq("#id-tipo-exame").value,
+        Nome: dq("#enome-tipo-exame").value,
+        Descricao: dq("#edescricao-tipo-exame").value
+    }
+
+    fetch("../Api/TipoExame", {
+        method: "PATCH",
+        headers: {
+            "Content-Type": "application/json"
+        },
+        body: JSON.stringify(data)
+    })
+    .then(response => response.json())
+    .then(data => {
+        if(data.mensagem) {
+            alert(data.mensagem);
+        }
+        else {
+            alert("Tipo de exame editado com sucesso");
             location.reload(true);
         }
     })
