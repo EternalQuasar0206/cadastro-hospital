@@ -27,5 +27,20 @@ namespace cadastro_hospital.Data {
                 });
             }
         }
+
+        public static string Alterar(int id, Exame exame) {
+            cadastro_hospitalContext ctx = new cadastro_hospitalContext();
+            Exame entity = ctx.Exames.Where(x => x.Id == id).FirstOrDefault();
+            if (entity == null)
+            {
+                return JsonSerializer.Serialize(new Erro() {
+                    mensagem = "O id do exame informado não existe"
+                });
+            }
+
+            ctx.Entry(entity).CurrentValues.SetValues(exame);
+            ctx.SaveChanges();
+            return JsonSerializer.Serialize(entity);
+        }
     }
 }
