@@ -114,5 +114,24 @@ namespace cadastro_hospital.Controllers
         public IActionResult Exame() {
             return Content(GerenciarExames.Listar(), "application/json");
         }
+
+        //====================Consultas====================
+        [HttpPost]
+        //Criar exame
+        public IActionResult Consulta([FromBody] MarcarConsultaRequest consultaRequest) {
+            return Content(GerenciarConsultas.Marcar(consultaRequest), "application/json");
+        }
+
+        [HttpDelete]
+        //Apagar exame
+        public IActionResult Consulta([FromBody] DesmarcarConsultaRequest consultaRequest) {
+            return Content(GerenciarConsultas.Desmarcar(consultaRequest), "application/json");
+        }
+
+        [HttpGet]
+        //Listar exames
+        public IActionResult Consulta() {
+            return Content(GerenciarConsultas.Listar(), "application/json");
+        }
     }
 }
