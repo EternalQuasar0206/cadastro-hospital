@@ -42,5 +42,22 @@ namespace cadastro_hospital.Data {
             ctx.SaveChanges();
             return JsonSerializer.Serialize(entity);
         }
+
+        public static string Excluir(int id) {
+            cadastro_hospitalContext ctx = new cadastro_hospitalContext();
+
+            try {
+                Exame entity = ctx.Exames.Where(x => x.Id == id).FirstOrDefault();
+                ctx.Exames.Remove(entity);
+                ctx.SaveChanges();
+                return JsonSerializer.Serialize(entity);
+            }
+            catch(Exception e) {
+                return JsonSerializer.Serialize(new Erro() {
+                    mensagem = "Ocorreu um erro ao realizar a ação: " + e
+                });
+            }
+
+        }
     }
 }
