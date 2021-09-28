@@ -225,6 +225,29 @@ function CadastrarTipoExame() {
     })
 }
 
+function ApagarTipoExame(id) {
+    fetch("../Api/TipoExame", {
+        method: "DELETE",
+        headers: {
+            "Content-Type": "application/json"
+        },
+        body: JSON.stringify({Id: id})
+    })
+    .then(response => response.json())
+    .then(data => {
+        if(data.mensagem) {
+            alert(data.mensagem);
+        }
+        else {
+            alert("Tipo de exame apagado com sucesso");
+            location.reload(true);
+        }
+    })
+    .catch((error) => {
+        alert("Ocorreu um erro: " + error)
+    })
+}
+
 fetch("../Api/TipoExame")
 .then(response => response.json())
 .then(data => {
