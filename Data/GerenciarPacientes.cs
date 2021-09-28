@@ -4,10 +4,9 @@ using System.Text.Json;
 using System;
 
 namespace cadastro_hospital.Data {
-    public static class GerenciarPaciente {
+    public static class GerenciarPacientes {
         public static string Novo(Paciente paciente) {
             cadastro_hospitalContext ctx = new cadastro_hospitalContext();
-            string result = string.Empty;
 
             try {
                 var cpf_equals_list = ctx.Pacientes.Where(x => x.Cpf == paciente.Cpf).ToList();
@@ -42,6 +41,23 @@ namespace cadastro_hospital.Data {
             ctx.Entry(entity).CurrentValues.SetValues(paciente);
             ctx.SaveChanges();
             return JsonSerializer.Serialize(entity);
+        }
+
+        public static string Excluir(int id) {
+            cadastro_hospitalContext ctx = new cadastro_hospitalContext();
+
+            try {
+                Paciente entity = ctx.Pacientes.Where(x => x.Id == id).FirstOrDefault();
+                ctx.Pacientes.Remove(entity);
+                ctx.SaveChanges();
+                return JsonSerializer.Serialize(entity);
+            }
+            catch(Exception e) {
+                return JsonSerializer.Serialize(new Erro() {
+                    mensagem = "Ocorreu um erro ao realizar a ação: " + e
+                });
+            }
+
         }
     }
 }
