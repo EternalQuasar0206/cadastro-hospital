@@ -2,6 +2,7 @@ using cadastro_hospital.Models;
 using System.Linq;
 using System.Text.Json;
 using System;
+using cadastro_hospital;
 
 namespace cadastro_hospital.Data {
     public static class GerenciarConsultas {
@@ -13,10 +14,10 @@ namespace cadastro_hospital.Data {
                 var exame = ctx.Exames.Where(x => x.Id == consultaRequest.exame).FirstOrDefault();
                 var concorrente = ctx.Consultas.Where(x => x.Data == consultaRequest.data).SingleOrDefault();
 
-                if(!IsDate(consultaRequest.data)) {
+                if(!Validadores.IsDate(consultaRequest.data)) {
                     throw new Exception("Data inválida");
                 }
-                
+
                 var consulta = new Consulta() {
                     Paciente = paciente.Id,
                     Exame = exame.Id,
@@ -54,18 +55,6 @@ namespace cadastro_hospital.Data {
             cadastro_hospitalContext ctx = new cadastro_hospitalContext();
             var consultas = ctx.Consultas.ToList();
             return JsonSerializer.Serialize(consultas);
-        }
-
-        public static bool IsDate(string tempDate) { 
-            DateTime fromDateValue; 
-            var formats = new[] { "dd/MM/yyyy", "yyyy-MM-dd" }; 
-            if (DateTime.TryParseExact(tempDate, formats, 
-            System.Globalization.CultureInfo.InvariantCulture, System.Globalization.DateTimeStyles.None, out fromDateValue)) { 
-                return true;
-            }
-            else { 
-                return false;
-            }
         }
     }
 }
