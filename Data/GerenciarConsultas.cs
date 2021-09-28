@@ -1,5 +1,6 @@
 using cadastro_hospital.Models;
 using System.Linq;
+using System.Text.Json;
 using System;
 
 namespace cadastro_hospital.Data {
@@ -13,12 +14,18 @@ namespace cadastro_hospital.Data {
                 var concorrente_data = ctx.Consultas.Where(x => x.Data == consultaRequest.data).FirstOrDefault();
 
                 if(concorrente_data != null) {
-                    ctx.Exames.Add(exame);
+                    var consulta = new Consulta() {
+                        Paciente = consultaRequest.paciente,
+                        Exame = consultaRequest.exame,
+                        Data = consultaRequest.data,
+                        Protocolo = (int)new Random().Next(1, 999999) + DateTime.Now.ToString("yyyyMMddHHmmss")
+                    };
+                    ctx.Consultas.Add(consulta);
                     ctx.SaveChanges();
-                    return JsonSerializer.Serialize(exame);
+                    return JsonSerializer.Serialize(consulta);
                 }
                 else {
-                    throw new Exception("Tipo de exame inválido ou inexistente.");
+                    throw new Exception("Já existe uma consulta marcada nesta data.");
                 }
             }
             catch(Exception e) {
@@ -26,6 +33,10 @@ namespace cadastro_hospital.Data {
                     mensagem = "Ocorreu um erro ao realizar a ação: " + e
                 });
             }
+        }
+
+        public static string Desmarcar() {
+            return "";
         }
     }
 }
