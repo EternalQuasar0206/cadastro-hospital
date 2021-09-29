@@ -12,8 +12,16 @@ namespace cadastro_hospital.Data {
             try {
                 var cpf_equals_list = ctx.Pacientes.Where(x => x.Cpf == paciente.Cpf).ToList();
 
-                if(!(Validadores.IsCpf(paciente.Cpf) && Validadores.IsPhone(paciente.Telefone) && Validadores.IsEmail(paciente.Email))) {
-                    throw new Exception("Dados inválidos, verifique os dados inseridos.");
+                if(!Validadores.IsCpf(paciente.Cpf)) {
+                    throw new Exception("CPF inválido.");
+                }
+
+                if(!Validadores.IsPhone(paciente.Telefone)) {
+                    throw new Exception("Telefone inválido.");
+                }
+
+                if(!Validadores.IsEmail(paciente.Email)) {
+                    throw new Exception("Email inválido.");
                 }
 
                 if(cpf_equals_list.Count > 0) {
