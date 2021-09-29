@@ -16,10 +16,6 @@ namespace cadastro_hospital.Data {
                     throw new Exception("CPF inválido.");
                 }
 
-                if(!Validadores.IsPhone(paciente.Telefone)) {
-                    throw new Exception("Telefone inválido.");
-                }
-
                 if(!Validadores.IsEmail(paciente.Email)) {
                     throw new Exception("Email inválido.");
                 }
